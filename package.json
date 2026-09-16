@@ -1,0 +1,13 @@
+{
+  "name": "draftsman",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Guided, right-sized system design for AI coding agents.",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build:adapters": "node scripts/build-adapters.mjs --target all --out dist"
+  },
+  "license": "MIT"
+}

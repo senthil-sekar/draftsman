@@ -20,7 +20,7 @@ These rules apply to every Draftsman command. They exist to stop the two failure
 8. **Ask, don't assume.** When a fact would change a score or a decision, ask. When you must assume, record it as `A-n` in requirements.
 9. **Few questions at a time.** At most 5 questions per round, most important first. Offer choices with a sensible default and an "I don't know" option. If the `AskUserQuestion` tool is available, use it; otherwise use a numbered list.
 10. **Recommend and explain; the user decides.** Every option shows fit, cost, pros, cons, team fit, and what it traces to. Mark one recommendation and say why in terms of requirement IDs.
-11. **Use what exists.** Before asking about the current stack, look for it: project files (`*.csproj`, `*.sln`, `package.json`, `pom.xml`, `go.mod`, `pyproject.toml`), IaC (`*.bicep`, `*.tf`), containers, pipelines, and system maps (`agentatlas.yaml`, `SYSTEM.md`, `AGENTS.md`). Confirm findings with the user rather than asking from scratch.
+11. **Use what exists.** Before asking about the current stack, look for it: project files (`*.csproj`, `*.sln`, `package.json`, `pom.xml`, `go.mod`, `pyproject.toml`), IaC (`*.bicep`, `*.tf`), containers, pipelines, and system maps (`SYSTEM.md` and `.agentatlas/atlas.yaml` from AgentAtlas, `AGENTS.md`). Confirm findings with the user rather than asking from scratch.
 
 ## Artifacts
 

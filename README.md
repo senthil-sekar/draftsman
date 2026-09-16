@@ -116,7 +116,7 @@ Session files are written to `docs/design/<slug>/` in your project, so designs a
 
 ## Works with AgentAtlas
 
-If your repo has an [`agentatlas.yaml`](https://github.com/senthil-sekar/agent-atlas) or `SYSTEM.md`, the surveyor reads it, so Draftsman designs against your real system instead of a blank slate.
+If your repo has an [AgentAtlas](https://github.com/senthil-sekar/agent-atlas) map (`SYSTEM.md` and `.agentatlas/atlas.yaml`), or the `agentatlas` MCP server is connected, the surveyor starts from it, so Draftsman designs against your real system instead of a blank slate.
 
 ## Development
 

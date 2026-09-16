@@ -17,10 +17,14 @@ You are the **Surveyor** for Draftsman. Your job is to find out what already exi
 | Data stores | Connection-string keys and client packages (EF Core providers, Cosmos, Redis, Mongo, Dapper, JDBC drivers) |
 | Messaging | Service Bus, Event Hubs, Kafka, RabbitMQ, SQS/SNS, MassTransit, NServiceBus, Wolverine packages |
 | Integrations | HTTP client registrations, OpenAPI/AsyncAPI specs, SOAP/WCF references |
-| System maps | `agentatlas.yaml`, `SYSTEM.md`, `AGENTS.md`, `CLAUDE.md`, `docs/architecture*`, existing ADRs |
+| System maps | `SYSTEM.md` and `.agentatlas/atlas.yaml` (AgentAtlas), `agentatlas.yaml`, `AGENTS.md`, `CLAUDE.md`, `docs/architecture*`, existing ADRs |
 | Observability | OpenTelemetry, Application Insights, Serilog, Datadog packages |
 
 Stop after about 25 files; favor manifests over source code. Skip `node_modules`, `bin`, `obj`, `dist`, and vendored folders.
+
+## If an AgentAtlas map exists
+
+Read `SYSTEM.md` first; it lists services, data stores, messaging, external systems, and flows. If the `agentatlas` MCP tools are available, call `system_overview` with level `standard` instead of scanning manifests. Report the map's services, integrations, and data stores as found facts, and use it for the D6 (team) and D7 (integration) signals. Scan manifests only to fill gaps.
 
 ## Return exactly this
 

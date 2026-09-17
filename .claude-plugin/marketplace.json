@@ -1,0 +1,16 @@
+{
+  "name": "draftsman",
+  "description": "Guided, right-sized system design for AI coding agents.",
+  "owner": {
+    "name": "Senthil Sekar",
+    "email": "ssenth1985@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "draftsman",
+      "source": "./",
+      "description": "Guided, right-sized system design for AI coding agents.",
+      "version": "0.1.0"
+    }
+  ]
+}

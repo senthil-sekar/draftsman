@@ -1,0 +1,20 @@
+{
+  "name": "draftsman",
+  "version": "0.1.0",
+  "description": "Guided, right-sized system design for AI coding agents. Turns a rough idea into requirements, ADRs, a design doc, and diagrams through a scored workflow.",
+  "author": {
+    "name": "Senthil Sekar",
+    "email": "ssenth1985@gmail.com",
+    "url": "https://github.com/senthil-sekar"
+  },
+  "homepage": "https://github.com/senthil-sekar/draftsman",
+  "repository": "https://github.com/senthil-sekar/draftsman",
+  "license": "MIT",
+  "keywords": [
+    "system-design",
+    "architecture",
+    "adr",
+    "design-docs",
+    "requirements"
+  ]
+}

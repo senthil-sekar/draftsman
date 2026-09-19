@@ -26,6 +26,12 @@ Stop after about 25 files; favor manifests over source code. Skip `node_modules`
 
 Read `SYSTEM.md` first; it lists services, data stores, messaging, external systems, and flows. If the `agentatlas` MCP tools are available, call `system_overview` with level `standard` instead of scanning manifests. Report the map's services, integrations, and data stores as found facts, and use it for the D6 (team) and D7 (integration) signals. Scan manifests only to fill gaps.
 
+## Check for org-level tools
+
+Before the design assumes something new must be built, check whether the org already has it. Look at your own available tools, not just the filesystem: if an MCP tool is connected whose name suggests an internal service catalog, enterprise search, wiki, or knowledge base (for example, containing `search`, `catalog`, `wiki`, `confluence`, `servicenow`, `backstage`, or `atlas`), query it for the problem area named in the brief (e.g. "reporting", "analytics") and report what it returns as a found fact, the same way an AgentAtlas map is treated.
+
+If no such tool is connected, don't guess — report "none detected" and let the user confirm in the playback step whether one exists that you should be pointed at.
+
 ## Return exactly this
 
 ```
@@ -38,6 +44,7 @@ Data stores: …
 Messaging: …
 Integrations found: …
 System map: <path> — <one-line summary> | none
+Org tooling: <tool queried and what it returned> | none detected — confirm with user
 Observability: …
 Signals for Scale Profile: <e.g. "3 teams' CODEOWNERS → D6 likely 2">
 To confirm with user: <3–5 short bullets>

@@ -21,9 +21,11 @@ These rules apply to every Draftsman command. They exist to stop the two failure
 9. **Few questions at a time.** At most 5 questions per round, most important first. Offer choices with a sensible default and an "I don't know" option. If the `AskUserQuestion` tool is available, use it; otherwise use a numbered list.
 10. **Recommend and explain; the user decides.** Every option shows fit, cost, pros, cons, team fit, and what it traces to. Mark one recommendation and say why in terms of requirement IDs.
 11. **Use what exists.** Before asking about the current stack, look for it: project files (`*.csproj`, `*.sln`, `package.json`, `pom.xml`, `go.mod`, `pyproject.toml`), IaC (`*.bicep`, `*.tf`), containers, pipelines, and system maps (`SYSTEM.md` and `.agentatlas/atlas.yaml` from AgentAtlas, `AGENTS.md`). Confirm findings with the user rather than asking from scratch.
+12. **Check for it at the org level too.** Before a design proposes building something new, check whether the org already runs it: look for a connected internal search, catalog, or wiki tool (the `surveyor` agent checks this automatically) and report what it finds as the "Org tooling" survey signal. If none is connected, ask the user once per session rather than assuming a build is needed.
+13. **Cite live research.** Anything not found in `design-catalog` — including anything the `researcher` agent returns — needs a source (URL and date) recorded in `options.md`, marked **estimated**. Never present a live-researched claim with the same confidence as a catalog entry.
 
 ## Artifacts
 
-12. **Write it down.** Session artifacts live in `docs/design/<slug>/` (unless the user names another folder): `draftsman.json`, `requirements.md`, `options.md`, `decisions/ADR-NNNN-<title>.md`, `design.md`, `review.md`. Start from the templates in `${CLAUDE_PLUGIN_ROOT}/templates/`.
-13. **Keep state current.** Update `phase`, `profile`, `budget`, `decisions`, `assumptions`, `openQuestions`, and `updatedAt` in `draftsman.json` at the end of every command.
-14. **End with the next step.** Finish every command with a short status line and the command to run next.
+14. **Write it down.** Session artifacts live in `docs/design/<slug>/` (unless the user names another folder): `draftsman.json`, `requirements.md`, `options.md`, `decisions/ADR-NNNN-<title>.md`, `design.md`, `review.md`. Start from the templates in `${CLAUDE_PLUGIN_ROOT}/templates/`.
+15. **Keep state current.** Update `phase`, `profile`, `budget`, `decisions`, `assumptions`, `openQuestions`, and `updatedAt` in `draftsman.json` at the end of every command.
+16. **End with the next step.** Finish every command with a short status line and the command to run next.

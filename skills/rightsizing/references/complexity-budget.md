@@ -43,4 +43,7 @@ Every architectural choice has a **cost** in points: build effort, operational b
 | Workflow engine (Durable Functions, Temporal, Step Functions) | 2 | Long-running or human-in-the-loop processes |
 | Search engine | 2 | Full-text or faceted search requirement |
 | Polyglot persistence (each extra store type) | 2 | A query or data shape the primary store can't serve |
+| Static site / server-rendered MPA | 0 | Default frontend (in DP-11) |
+| SPA (client-rendered) | 1 | App-like interactivity with a separate API |
+| SSR / meta-framework (hybrid) | 2 | Needs both SEO and rich interactivity |
 | Micro-frontends | 5 | D6 ≥ 3 with independent UI teams |

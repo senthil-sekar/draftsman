@@ -22,10 +22,12 @@
 ## 5. Constraints
 | ID | Constraint | Why |
 |---|---|---|
-| C-1 | Must run on Azure | Company standard |
+| C-1 | <e.g. "must run on the company's existing cloud account"> | <why> |
 
 ## 6. Existing context
 - **Current stack and skills:** …
+- **Language / runtime preference:** <found in repo | user-stated | open — no preference, recommend one>
+- **Cloud / hosting preference:** <found in repo | user-stated | open — no preference, recommend one>
 - **Systems to integrate with:** …
 - **System map:** <link to agentatlas.yaml or SYSTEM.md if present>
 

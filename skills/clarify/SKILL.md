@@ -16,14 +16,14 @@ Leave this command with functional requirements, non-functional requirements, co
 
 ## Question rounds
 
-Run up to **4 rounds**, each with **at most 5 questions**. Skip any question already answered by the brief or the survey; confirm those instead ("I found .NET 8 and Bicep. Is that the stack to build on?").
+Run up to **4 rounds**, each with **at most 5 questions**. Skip any question already answered by the brief or the survey; confirm those instead ("I found <language> and <IaC tool>. Is that the stack to build on?"). If the survey found nothing and the user states no preference, record "open" in `requirements.md` — don't default to any particular language or cloud provider.
 
 | Round | Focus | Covers |
 |---|---|---|
 | 1 | **Purpose and users** | Core user journeys, who uses it, what "done" looks like for v1, what's out of scope |
 | 2 | **Scale and quality** | Peak load (D1), data volume and growth (D2), availability and recovery (D3), latency targets |
 | 3 | **Integrity and risk** | Consistency needs (D4), sensitive data and regulations (D5), audit needs |
-| 4 | **People and landscape** | Team size and skills (D6), systems to integrate (D7), lifespan and deadline (D8), budget and cloud constraints |
+| 4 | **People and landscape** | Team size and skills (D6), systems to integrate (D7), lifespan and deadline (D8), **language/runtime and cloud provider** (found by the survey, or ask; "no preference" is a valid answer) |
 
 ### How to ask
 

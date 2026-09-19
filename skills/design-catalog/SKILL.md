@@ -12,11 +12,11 @@ Load only the file you need.
 |---|---|
 | `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/decision-points.md` | Decide **which** decisions this system actually needs to make |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/patterns.md` | Compare architecture and integration patterns |
-| `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/stacks.md` | Compare concrete technologies across Azure, AWS, GCP, and open source |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/stacks.md` | Compare concrete technologies across AWS, Azure, GCP, and open source, matched to the user's language and cloud provider (see `options` step 0) |
 
 ## How to present an option
 
-Every option you present uses this shape:
+Every option you present uses this shape. This example happens to use Azure and .NET only to show the shape — substitute whatever language and cloud provider the user actually chose or has (`stacks.md` covers AWS, Azure, GCP, and OSS equally; never default to one):
 
 ```
 ### Option B: Modular monolith on Azure Container Apps  ⭐ Recommended

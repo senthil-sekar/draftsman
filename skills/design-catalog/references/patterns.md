@@ -35,6 +35,15 @@ Costs and unlock conditions match `rightsizing/references/complexity-budget.md`.
 | API gateway | 1 | External consumers; 3+ APIs; throttling or auth at the edge | One internal API | Central policy, keys, quotas | Another hop; config sprawl |
 | Backend for frontend | 2 | Multiple clients with different needs | One client | Tailored payloads | More services |
 
+## Frontend
+
+| Pattern | Cost | Use when | Avoid when | Pros | Cons |
+|---|---|---|---|---|---|
+| Static site / server-rendered MPA | 0 (in DP-11) | Content-first, simple forms, small team, SEO matters | Rich, app-like interactivity | Simplest to build and host; great SEO and load time | Full page reloads; less app-like UX |
+| SPA (client-rendered) | 1 | App-like interactivity; a separate API already exists | SEO-critical public content; low-powered or offline-first clients | Rich UX; clean API/frontend split | Client bundle size; SEO needs extra work; auth/state on the client |
+| SSR / meta-framework (hybrid) | 2 | Need both SEO and rich interactivity | Small team unfamiliar with the framework's server runtime | Fast first paint; SEO; still app-like | Two runtimes to operate (server + client); more moving parts |
+| Micro-frontends | 5 | D6 ≥ 3 with independent UI teams shipping the same product | One team; one release cadence | Independent team deploys | Shared design system and routing overhead; duplicate dependencies |
+
 ## Resilience (floor items, cost 0 when required)
 
 Timeouts, retries with exponential backoff and jitter, circuit breakers, bulkheads, idempotency keys, dead-letter queues, health checks.

@@ -15,7 +15,7 @@ Use the `design-catalog` skill (`decision-points.md`, then `patterns.md` and `st
 ## Steps
 
 1. **Select decision points.** Go through `decision-points.md` and keep only those whose trigger applies to the locked requirements. List the rest under **Not needed** with a one-line reason each. If `$ARGUMENTS` names a decision point, work on that one only.
-2. **Build options.** For each decision point, prepare **2–3 options** that actually fit the profile. Include at least one option cheaper than the recommendation when one exists, so the user sees the trade-off. Use the option shape from the `design-catalog` skill.
+2. **Build options.** For each decision point, prepare **2–3 options** that actually fit the profile. Include at least one option cheaper than the recommendation when one exists, so the user sees the trade-off. Use the option shape from the `design-catalog` skill. If `decision-points.md`, `patterns.md`, and `stacks.md` have no entry for this decision point or a candidate option, or the user asks to double-check against current practice, delegate to the `researcher` agent (give it the decision point, the Scale Profile, the existing stack, and any "Org tooling" findings from the survey) instead of estimating from memory. Fold its options in, keep its cost estimates marked **estimated**, and carry its source and date into `options.md`.
 3. **Check each option** against unlock conditions and the remaining budget, counting the costs of decisions already accepted. Say plainly if an option would push the design over budget.
 4. **Write `options.md`** from `${CLAUDE_PLUGIN_ROOT}/templates/options.md`.
 5. **Present in batches of up to 3 decision points**, in the order from `decision-points.md`. For each one, show the options compactly and ask the user to choose: accept the recommendation, pick another option, or ask for more detail.
@@ -27,3 +27,4 @@ Use the `design-catalog` skill (`decision-points.md`, then `patterns.md` and `st
 - Don't present more than 3 options per decision point.
 - Don't recommend an option because it is popular or modern; tie every recommendation to requirement IDs, scores, or team fit.
 - Don't present options for decision points marked **Not needed**, unless the user asks.
+- Don't present a live-researched option without its source and date, or with the same confidence as a catalog entry.

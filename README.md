@@ -105,7 +105,8 @@ See [docs/adapters.md](docs/adapters.md) for what changes outside Claude Code.
 .claude-plugin/     plugin.json, marketplace.json
 skills/             start, clarify, options, decide, doc, review, status (commands)
                     rightsizing, design-catalog (background knowledge)
-agents/             surveyor (repo scan), drafter (design author), inspector (independent reviewer)
+agents/             surveyor (repo + org-tooling scan), researcher (live best-practice lookup),
+                    drafter (design author), inspector (independent reviewer)
 rules/              core-rules.md: workflow gates and anti-drift rules
 templates/          requirements, options, ADR, design, review, session state
 scripts/            validate.mjs, build-adapters.mjs
@@ -117,6 +118,13 @@ Session files are written to `docs/design/<slug>/` in your project, so designs a
 ## Works with AgentAtlas
 
 If your repo has an [AgentAtlas](https://github.com/senthil-sekar/agent-atlas) map (`SYSTEM.md` and `.agentatlas/atlas.yaml`), or the `agentatlas` MCP server is connected, the surveyor starts from it, so Draftsman designs against your real system instead of a blank slate.
+
+## Beyond the repo
+
+Two things keep Draftsman from designing in a vacuum:
+
+- **Org tooling.** Before proposing something new, the surveyor checks whether any connected MCP tool looks like an internal search, catalog, or wiki, and queries it for an existing solution. If none is connected, it asks once instead of assuming a build is needed.
+- **Live research.** `design-catalog` is a hand-curated, versioned reference — it can go stale. When `/draftsman:options` hits a decision point the catalog doesn't cover, or the user asks to double-check current practice, the `researcher` agent searches for current, dated sources instead of guessing from training data. Every researched option is marked **estimated** and carries its source, never presented with the same confidence as a catalog entry.
 
 ## Development
 

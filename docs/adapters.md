@@ -9,6 +9,7 @@ Claude Code is the reference platform. The adapter builder ports the same source
 | Background knowledge | Loaded on demand as skills | Plain files under the target root, read when a command points to them |
 | Structured questions | `AskUserQuestion` tool when available | Numbered lists |
 | Paths | `${CLAUDE_PLUGIN_ROOT}` | Rewritten to `.cursor/draftsman`, `.github/draftsman`, or `.draftsman` |
+| Live research | `researcher` agent; every search is restricted to the trusted list with `allowed_domains` | Same instructions and trusted list, but whether the IDE can search the web, and restrict searches by domain, depends on the IDE. Where it can't restrict them, the trusted list is enforced only by the instructions and by `options` dropping untrusted sources, so check cited sources yourself. |
 
 ## Updating
 

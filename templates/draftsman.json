@@ -2,6 +2,9 @@
   "schemaVersion": 1,
   "slug": "<kebab-case-name>",
   "title": "<System name>",
+  "mode": "new",
+  "baseline": null,
+  "domain": null,
   "phase": "intake",
   "phases": ["intake", "clarify", "requirements-locked", "options", "decided", "designed", "reviewed"],
   "profile": {

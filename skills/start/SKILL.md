@@ -14,7 +14,7 @@ First read `${CLAUDE_PLUGIN_ROOT}/rules/core-rules.md` and follow it for the who
 
 1. **Check for an existing session.** Look for `docs/design/*/draftsman.json`. If one matches this idea, offer to resume it with `/draftsman:status` instead of starting over.
 2. **Capture the brief.** If no description was provided, ask the user to describe the idea in a few sentences. Don't ask anything else yet.
-3. **Survey existing context.** Delegate to the `surveyor` agent to scan the repository for the current stack, IaC, pipelines, and system maps. If the workspace has no code, skip this and note "greenfield".
+3. **Survey existing context.** Delegate to the `surveyor` agent to scan the repository for the current stack, IaC, pipelines, and system maps. If the workspace has no code, skip this and note "greenfield". If the idea changes or extends a system that already exists here (rather than building a new one beside it), switch to the `/draftsman:evolve` workflow (read `${CLAUDE_PLUGIN_ROOT}/skills/evolve/SKILL.md`) and say so in one line.
 4. **Create the session.**
    - Choose a short kebab-case `slug` and confirm it with the user in one line.
    - Create `docs/design/<slug>/`.

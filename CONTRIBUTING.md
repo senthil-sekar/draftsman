@@ -14,9 +14,14 @@ Thanks for helping make agent-generated designs better.
 npm run validate
 npm run build:adapters
 claude plugin validate . --strict   # if you have Claude Code installed
+npm run eval:quick                  # if you changed a skill, agent, rule, or reference
 ```
 
-Then try your change with `claude --plugin-dir .` on a real idea, and describe what you tested in the PR.
+Then try your change with `claude --plugin-dir .` on a real idea, and describe what you tested in the PR. If your change affects sizing, run the full `npm run eval` and include the scores.
+
+## Adding a domain pack
+
+Copy the shape of `skills/domain-insurance/`: a `SKILL.md` with scoring hints, plus `references/` for floor additions and integrations. Register it in the domain-packs table in `skills/rightsizing/SKILL.md`, add it to the required list in `scripts/validate.mjs`, and add at least one eval case that loads it.
 
 ## Adding a stack or pattern
 

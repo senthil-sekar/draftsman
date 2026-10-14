@@ -26,6 +26,14 @@ Draftsman keeps designs honest with three linked tools. Load the reference file 
 - **Individual dimension scores** unlock specific patterns (for example, Consistency 3 unlocks event sourcing) and raise the baseline floor.
 - Going over budget is allowed only with an ADR that records a budget override and names the requirement that forces it.
 
+## Domain packs
+
+A domain pack adds industry-specific scoring hints and floor items on top of this model. If `draftsman.json` has a `domain`, load that pack's skill and apply its floor additions alongside `baseline-floor.md`. Available packs:
+
+| `domain` | Skill |
+|---|---|
+| `insurance` | the `domain-insurance` skill |
+
 ## Defaults when the user doesn't know
 
 - If a dimension is unknown, score it at the **lower** plausible value, record an assumption (`A-n`), and flag it as a risk to revisit.

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Structural checks for the Draftsman plugin. Exit 1 on any error.
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { ROOT, loadSkills, loadAgents, listFiles } from './lib.mjs';
+import { ROOT, loadSkills, loadAgents, listFiles, parseFrontmatter } from './lib.mjs';
 
 const errors = [];
 const err = (m) => errors.push(m);
@@ -33,7 +33,7 @@ for (const s of skills) {
   else if (s.data.description.length > 1024) err(`${where}: description over 1024 chars`);
   skillNames.add(s.data.name);
 }
-for (const required of ['start', 'clarify', 'options', 'decide', 'doc', 'review', 'status', 'rightsizing', 'design-catalog']) {
+for (const required of ['start', 'clarify', 'options', 'decide', 'doc', 'review', 'status', 'evolve', 'rightsizing', 'design-catalog', 'domain-insurance']) {
   if (!skillNames.has(required)) err(`skills/${required}: missing`);
 }
 
@@ -49,7 +49,7 @@ for (const a of agents) {
 }
 
 // 4. Cross-references in markdown
-const mdFiles = listFiles(ROOT).filter((p) => p.endsWith('.md') && !p.includes('node_modules') && !p.includes(`${'/'}.git${'/'}`) && !relative(ROOT, p).startsWith('examples') && !relative(ROOT, p).startsWith('dist'));
+const mdFiles = listFiles(ROOT).filter((p) => p.endsWith('.md') && !p.includes('node_modules') && !p.includes(`${'/'}.git${'/'}`) && !['examples', 'dist', 'evals'].some((d) => relative(ROOT, p).startsWith(d)));
 for (const p of mdFiles) {
   const text = readFileSync(p, 'utf8');
   const where = relative(ROOT, p);
@@ -72,8 +72,38 @@ for (const p of mdFiles) {
 try { JSON.parse(readFileSync(join(ROOT, 'templates/draftsman.json'), 'utf8')); }
 catch (e) { err(`templates/draftsman.json: ${e.message}`); }
 
+// 6. Eval cases (structure only; `npm run eval` runs them)
+const GRADER_TYPES = new Set(['regex', 'tool_used', 'tool_order', 'file_exists', 'llm', 'baseline']);
+const evalsDir = join(ROOT, 'evals');
+let evalCases = 0;
+if (existsSync(evalsDir)) {
+  for (const name of readdirSync(evalsDir)) {
+    const dir = join(evalsDir, name);
+    if (['results', 'mocks'].includes(name) || !statSync(dir).isDirectory()) continue;
+    evalCases++;
+    const where = `evals/${name}`;
+    const caseYaml = join(dir, 'case.yaml');
+    if (!existsSync(join(dir, 'prompt.md')) && !existsSync(caseYaml)) err(`${where}: needs prompt.md or case.yaml`);
+    if (existsSync(caseYaml)) {
+      const script = readFileSync(caseYaml, 'utf8').match(/scaffold_script:\s*(\S+)/)?.[1];
+      if (script && !existsSync(join(dir, script))) err(`${where}: scaffold_script ${script} not found`);
+    }
+    const gradersDir = join(dir, 'graders');
+    const graders = existsSync(gradersDir) ? readdirSync(gradersDir).filter((f) => f.endsWith('.md')) : [];
+    if (!graders.length) err(`${where}: no graders/*.md`);
+    for (const g of graders) {
+      const { data } = parseFrontmatter(readFileSync(join(gradersDir, g), 'utf8'));
+      if (!GRADER_TYPES.has(data?.type)) { err(`${where}/graders/${g}: unknown type "${data?.type}"`); continue; }
+      if (data.type === 'regex') {
+        try { new RegExp(data.pattern ?? '', data.flags ?? ''); }
+        catch (e) { err(`${where}/graders/${g}: bad pattern: ${e.message}`); }
+      }
+    }
+  }
+}
+
 if (errors.length) {
   console.error(`✗ ${errors.length} problem(s):\n  - ${errors.join('\n  - ')}`);
   process.exit(1);
 }
-console.log(`✓ Draftsman valid: ${skills.length} skills, ${agents.length} agents, ${mdFiles.length} markdown files checked`);
+console.log(`✓ Draftsman valid: ${skills.length} skills, ${agents.length} agents, ${mdFiles.length} markdown files, ${evalCases} eval cases checked`);

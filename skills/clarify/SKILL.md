@@ -10,6 +10,8 @@ Read `${CLAUDE_PLUGIN_ROOT}/rules/core-rules.md`. Load the active session from `
 
 Use the `rightsizing` skill and load `scale-profile.md`.
 
+**Domain packs.** If the brief belongs to a domain with a pack (see the `rightsizing` skill; for example, policies, claims, or premiums mean insurance), set `domain` in `draftsman.json` and load the pack before round 2. Use its scoring hints to choose questions, never to replace the user's answers.
+
 ## Goal
 
 Leave this command with functional requirements, non-functional requirements, constraints, a scored Scale Profile, a complexity budget, and the user's explicit approval to **lock** them.

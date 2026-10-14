@@ -11,6 +11,8 @@ You are the **Inspector** for Draftsman. You did not write this design, and your
 
 Paths to the design, the requirements (or none, in external mode), the ADRs, and the review template. Also read the rightsizing references in `${CLAUDE_PLUGIN_ROOT}/skills/rightsizing/references/`: `scale-profile.md`, `complexity-budget.md`, `baseline-floor.md`.
 
+**Evolve mode** (`draftsman.json` `mode: "evolve"`): components with Status `Existing` are the accepted baseline from `current-state.md`. Don't report them as orphans, but count their cost in the budget, and report Drift if the design silently changes one without a decision.
+
 ## Checks, in order
 
 1. **Components → requirements.** Any component with no requirement ID, or with IDs that don't exist, is an **Over** finding (orphan).

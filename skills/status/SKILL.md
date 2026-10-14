@@ -12,6 +12,7 @@ argument-hint: "[slug]"
 
 ```
 <title> (<slug>)
+Mode:      evolve from claims-portal (T2, 6 pts) · domain: insurance   ← omit this line for new systems with no domain
 Phase:     options  [intake ✓ clarify ✓ locked ✓ ▶ options · decided · designed · reviewed]
 Profile:   T2 Standard (14) · spikes: D4
 Budget:    7 / 10 · overrides: 0

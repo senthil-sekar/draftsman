@@ -13,11 +13,15 @@ Raise a decision only when its trigger applies. Skipping irrelevant decisions is
 | DP-7 | Caching | No | Latency target or read-heavy profile |
 | DP-8 | Integration approach for legacy | No | D7 ≥ 2 or a named legacy system |
 | DP-9 | Workflow / orchestration | No | Long-running, multi-step, or human-in-the-loop processes |
-| DP-10 | Secondary stores (search, analytics, blob) | No | A query or data shape the primary store can't serve well |
+| DP-10 | Secondary stores (search, blob) | No | A query or data shape the primary store can't serve well |
 | DP-11 | Frontend approach | No | The system has a UI |
 | DP-12 | Deployment topology (regions, zones) | No | D3 ≥ 2 |
 | DP-13 | Observability stack | T2+ | |
 | DP-14 | IaC and CI/CD tooling | T1+ | |
+| DP-15 | Analytics and reporting | No | Dashboards, reports, metrics over history, or data exports beyond simple lists |
+| DP-16 | AI and ML | No | A requirement for generation, summarization, extraction, semantic search, prediction, or an agent acting on the user's behalf |
+
+DP-15 and DP-16 are easy to over-build. Start at the cheapest row in `stacks.md` and move down only when an unlock condition in `complexity-budget.md` is met.
 
 ## Ordering
 

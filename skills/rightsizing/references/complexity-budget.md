@@ -47,3 +47,15 @@ Every architectural choice has a **cost** in points: build effort, operational b
 | SPA (client-rendered) | 1 | App-like interactivity with a separate API |
 | SSR / meta-framework (hybrid) | 2 | Needs both SEO and rich interactivity |
 | Micro-frontends | 5 | D6 ≥ 3 with independent UI teams |
+| Integration platform (iPaaS / ESB) | 2 | D7 ≥ 2 with many integrations, or a platform the org already runs |
+| Reporting on the operational database (views, replica) | 0–1 | Default analytics (in DP-15); the replica counts as read replicas |
+| BI tool | 1 | Business users need self-service dashboards or exports |
+| Analytical warehouse with scheduled ELT | 3 | D2 ≥ 2, **or** 3+ source systems combined, **or** analytics would degrade the operational store |
+| Lakehouse | 5 | D2 = 3, **or** large semi-structured data, **or** data science on raw history |
+| Streaming analytics (on top of event streaming) | 3 | Freshness under a minute is a requirement **and** D1 ≥ 2 |
+| Hosted model API | 1 | Default AI (in DP-16) |
+| RAG on an existing store | 2 | Answers must be grounded in the organization's content |
+| Dedicated vector database | 2 | Counts as polyglot persistence: vector volume or filtering the existing store can't serve |
+| Agent with tool use | 3 | Multi-step tasks that act in other systems |
+| Classical ML model on an ML platform | 3 | A prediction requirement rules can't meet, **and** labeled data exists |
+| Self-hosted or fine-tuned model | 5 | Residency or compliance rules out hosted APIs, **or** a custom model is required |

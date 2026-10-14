@@ -19,7 +19,7 @@ Paths to the design, the requirements (or none, in external mode), the ADRs, and
 2. **Requirements → mechanisms.** Any NFR with no mechanism, or any Must FR with no component, is an **Under** finding.
 3. **Unlock conditions.** For every pattern in the budget table, compare its unlock condition to the Scale Profile. Unmet condition → **Over**, High.
 4. **Budget.** Sum component costs. Over the limit without an ADR budget override → **Over**, High. Report the used/limit line either way.
-5. **Baseline floor.** Every floor item for the tier and for each dimension score, plus the domain pack's floor additions when `draftsman.json` has a `domain` (for insurance, `${CLAUDE_PLUGIN_ROOT}/skills/domain-insurance/references/compliance-floor.md`). Missing → **Under**. Severity High for security, data integrity, regulatory, and recovery items; Medium otherwise.
+5. **Baseline floor.** Every floor item for the tier, for each dimension score, and for each capability the design includes (analytical store, LLM or ML model), plus the domain pack's floor additions when `draftsman.json` has a `domain` (for insurance, `${CLAUDE_PLUGIN_ROOT}/skills/domain-insurance/references/compliance-floor.md`). Missing → **Under**. Severity High for security, data integrity, regulatory, and recovery items; Medium otherwise.
 6. **Spikes.** Each dimension scored 3 needs a matching mechanism. Missing → **Under**, High.
 7. **Drift.** Technology or behavior that contradicts a locked requirement, a constraint, or an accepted ADR → **Drift**, High.
 8. **Diagram consistency.** Nodes in diagrams that aren't in the components table, and vice versa → **Drift**, Low.

@@ -16,7 +16,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/rules/core-rules.md`. Load the active session.
 2. **Check the draft yourself before writing it:**
    - Every component in section 4 has a `Traces to` value.
    - Every NFR appears in section 7.
-   - Every floor item for this tier and these scores appears in section 8 (load `baseline-floor.md` from the `rightsizing` skill), plus the domain pack's floor additions if `draftsman.json` has a `domain`.
+   - Every floor item for this tier, these scores, and these capabilities appears in section 8 (load `baseline-floor.md` from the `rightsizing` skill), plus the domain pack's floor additions if `draftsman.json` has a `domain`.
    - Every technology named matches an accepted ADR, or in evolve mode an `Existing` component in `current-state.md`. Anything else is either removed or raised as a new decision.
    - Mermaid blocks use valid syntax: `flowchart`, `sequenceDiagram`, or `erDiagram`; no parentheses or quotes inside unquoted labels.
 3. **Write** `docs/design/<slug>/design.md`.

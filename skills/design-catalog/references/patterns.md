@@ -44,6 +44,26 @@ Costs and unlock conditions match `rightsizing/references/complexity-budget.md`.
 | SSR / meta-framework (hybrid) | 2 | Need both SEO and rich interactivity | Small team unfamiliar with the framework's server runtime | Fast first paint; SEO; still app-like | Two runtimes to operate (server + client); more moving parts |
 | Micro-frontends | 5 | D6 ≥ 3 with independent UI teams shipping the same product | One team; one release cadence | Independent team deploys | Shared design system and routing overhead; duplicate dependencies |
 
+## Analytics and reporting
+
+| Pattern | Cost | Use when | Avoid when | Pros | Cons |
+|---|---|---|---|---|---|
+| Reporting on the operational database (views, materialized views, read replica) | 0–1 (in DP-15) | One source system; hours-old data is fine; up to about 1 TB | Analytics queries would slow the operational workload | No new store or pipeline; reuses existing skills | Schema shaped for transactions, not analysis; replica lag |
+| BI tool over an existing store | 1 | Business users need dashboards, filters, and exports | A handful of fixed reports an app page can serve | Self-service; no custom report code | License per user (commercial BI); governance of who sees what |
+| Analytical warehouse with scheduled ELT | 3 | Several source systems combined, or heavy analytics separate from operations | One source and modest volume | Fast analytical queries; history and joins across sources | A second copy of the data to secure, pipelines to run |
+| Lakehouse (open table formats, Spark or SQL engines) | 5 | D2 = 3, large semi-structured data, data science on raw history | Structured reporting at modest volume | Cheap storage at scale; one copy for BI and ML | Platform to operate; governance and cost control are real work |
+| Streaming analytics | 3, plus event streaming | Freshness under a minute at real load, and it changes a decision | Daily or hourly freshness is enough | Real-time metrics and alerts | Stateful stream processing is hard to test and operate |
+
+## AI and ML
+
+| Pattern | Cost | Use when | Avoid when | Pros | Cons |
+|---|---|---|---|---|---|
+| Hosted model API (prompting) | 1 (in DP-16) | Generation, summarization, extraction, or classification from text and documents | A deterministic rule or lookup would do | No model to train or host | Per-token cost; latency; data leaves your boundary (check terms and residency) |
+| Retrieval-augmented generation (RAG) on an existing store | 2 | Answers must come from the organization's own content, with citations | General knowledge is enough, or the content fits in the prompt | Grounded answers; content updates without retraining | Chunking, permissions, and freshness of the index need care |
+| Agent with tool use | 3 | Multi-step tasks that read and act in other systems | A single call or a fixed workflow does the job | Handles open-ended tasks | Harder to test; needs least-privilege tools and human approval for consequential actions |
+| Classical ML model on an ML platform | 3 | A prediction (fraud score, triage, pricing signal) that rules can't capture, with labeled data | No labeled data, or rules are accurate enough | Measurable accuracy; cheap at inference | Training data, drift monitoring, and model governance |
+| Self-hosted or fine-tuned model | 5 | Compliance or residency rules out hosted APIs; a custom model is required; very high sustained volume | Any hosted model meets the need | Full control of data and model | GPU capacity, serving, and upgrades to operate |
+
 ## Resilience (floor items, cost 0 when required)
 
 Timeouts, retries with exponential backoff and jitter, circuit breakers, bulkheads, idempotency keys, dead-letter queues, health checks.

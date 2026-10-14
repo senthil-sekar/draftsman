@@ -44,6 +44,24 @@ There are two kinds of grader, and both count toward the score:
 
 `tool_used: Skill` graders are indicators only and don't affect the score. The `--threshold` (default 1.0) applies to the plugin arm.
 
+## Results
+
+### 0.4.0, 3 runs per case (2026-10-14), partial
+
+Five cases (`t1-*`, `t2-*`, `t4-*`, `thin-*`) have no valid data: their runs hit the account's usage limit before starting. The three that completed:
+
+| Case | With plugin | Without | Outcome checks the no-plugin arm failed |
+|---|---|---|---|
+| `research-handbook-assistant` | 1.00 (3/3) | 0.55 | `sources-trusted` 0/3: cited vendor marketing blogs (cloudburn.io, coralogix.com), personal DBA blogs, AWS Builder Center community posts, AWS re:Post Q&A, a third-party GitHub issue, and a security vendor's page. The plugin arm cited only official docs, LICENSE files, and pricing pages. |
+| `evolve-claims-reporting` | 1.00 (3/3) | 0.40 | `change-is-explicit` 0/3: no Existing/Changed/New marking or rollout plan. Both arms extended the existing app rather than adding a data platform. |
+| `t0-pto-tracker` | 0.89 (2/3) | 0.67 | None: both arms right-sized and stayed on the stack. The plugin's one miss was a run where the `start` skill didn't trigger, so no session or ADRs were written. The skill's description was broadened afterward. |
+
+What these show so far: with full facts, the model already right-sizes without the plugin. The measured gains are trusted sourcing, explicit change plans, the floor items, and the session artifacts. The thin-brief cases, which test the missing-facts behavior, still need a complete run.
+
+### 0.3.0, 1 run per case (2026-10-14)
+
+All 5 cases passed with the plugin. On outcome checks, the no-plugin arm missed `no-silent-stack` (T1), `generic-floor` (T2), and `change-is-explicit` (evolve), and passed all right-sizing checks.
+
 ## Adding a case
 
 1. Pick a system and write its facts so the total lands mid-band (see `skills/rightsizing/references/scale-profile.md`).

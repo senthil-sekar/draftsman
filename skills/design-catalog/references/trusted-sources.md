@@ -72,6 +72,7 @@ Even when they rank first or are the only result:
 
 - Personal and community blogs: Medium, dev.to, Hashnode, Substack, personal sites
 - Forums and Q&A: Reddit, Hacker News, Stack Overflow, Quora
+- **Community sections on trusted vendor domains**: they are user-written, not the vendor's documentation. For example `learn.microsoft.com/answers` (Microsoft Q&A), `repost.aws` (AWS re:Post), `builder.aws.com` (community articles), `discuss.*`, `community.*`, and `forum.*` sites, and GitHub issues and discussions
 - Video platforms
 - Review, affiliate, and "top 10" sites
 - A vendor's comparison or "X vs Y" page about a competitor

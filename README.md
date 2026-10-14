@@ -62,7 +62,7 @@ Two laws drive the review:
 1. **Every component traces to a requirement.** Otherwise it's over-engineering.
 2. **Every requirement traces to a mechanism.** Otherwise it's under-engineering.
 
-**No default stack.** Draftsman never assumes a language or cloud. It uses what it finds in your repo or what you tell it, shows only the matching options, and compares across ecosystems when you have no preference.
+**No default stack.** Draftsman never assumes a language or cloud. It uses what it finds in your repo or what you tell it, shows only the matching options, and compares across ecosystems when you have no preference. Every option states its license (open source, managed cloud, commercial, SaaS, or source-available), and Draftsman prefers tools your organization already licenses over new contracts.
 
 **Domain packs** add industry-specific scoring hints and floor items. The **insurance** pack covers effective-dated policies, reproducible rating, consumer-report rules, claims deadlines, OFAC screening, and regulator notification. It loads automatically when the brief involves policies, claims, or premiums. It's a design checklist, not legal advice.
 

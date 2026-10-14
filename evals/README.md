@@ -13,8 +13,11 @@ They run with [`claude plugin eval`](https://code.claude.com/docs/en/plugin-eval
 | `t2-endorsement-intake` | T2 Standard, insurance | Microservices for one team; missing generic or insurance floor items |
 | `t4-premium-payments` | T4 Critical, insurance | Under-engineering a multi-region ledger; blowing the budget without an override |
 | `evolve-claims-reporting` | Brownfield change | Bolting a data platform onto an existing app instead of extending it |
+| `thin-claims-reporting` | One-line brief, brownfield | Building a data platform when the brief says only "we have no reporting" |
+| `thin-fraud-detection` | One-line brief, greenfield | Reaching for streaming, a lakehouse, or a feature store with no facts to justify them; auto-denying flagged claims |
+| `research-handbook-assistant` | T1 with live research | Searching without the trusted-domain filter; citing blogs or forums; adding a vector database the existing PostgreSQL can replace |
 
-Each case's facts are chosen so the expected Scale Profile total sits in the middle of its tier band, not on an edge. A tier failure means real drift, not a coin flip at a boundary.
+The full-fact cases give the agent everything up front, and their facts put the expected Scale Profile total in the middle of its tier band, so a tier failure means real drift. The **thin-brief** cases give one sentence, like a real request. They test what Draftsman does with missing facts: score low, record assumptions, and extend what exists.
 
 ## Running
 
@@ -24,20 +27,20 @@ npm run eval                # 3 runs per case, with and without the plugin
 npm run eval -- --case 't2-*'
 ```
 
-Both scripts pass `--scaffold`, which runs `evolve-claims-reporting/fixture.sh` to build a fake existing repository. It only writes files into the run's empty workspace. They also pass `--no-publish`, so reports stay local. Add `--publish-report` to share one. In CI, also add `--trust-plugin`.
+Both scripts pass `--scaffold`, which runs the brownfield cases' `fixture.sh` to build a fake existing repository. It only writes files into the run's empty workspace. They allow `WebSearch` and `WebFetch` for the research case, which makes real web requests, so its results can vary with search results over time. They also pass `--no-publish`, so reports stay local. Add `--publish-report` to share one. In CI, also add `--trust-plugin`.
 
 Results go to `evals/results/<timestamp>/` (gitignored): `report.html` and `aggregate-result.json`.
 
 ## Why the prompts state every answer
 
-Eval runs have no user to answer questions. Each case puts every fact in the prompt and uses `append_system_prompt` to tell the agent to accept its own recommendations and record assumptions instead of asking. `AskUserQuestion` is removed with `--disallow-tools`. The interview itself isn't tested here. What's tested is whether the answers turn into a right-sized design.
+Eval runs have no user to answer questions. Every case uses `append_system_prompt` to tell the agent to accept its own recommendations and record assumptions instead of asking, and `AskUserQuestion` is removed with `--disallow-tools`. The interview itself isn't tested. The full-fact cases test whether the answers turn into a right-sized design; the thin-brief cases test what happens when the answers are missing.
 
 ## Reading the score and Δ
 
 There are two kinds of grader, and both count toward the score:
 
-- **Outcome graders** (`llm`, weight 2–3): is the design right-sized, on the requested stack, and does it cover the floor? These are fair to both arms, so their per-grader Δ is the honest measure of what the plugin adds.
-- **Process graders** (`regex` / `file_exists`, weight 1): the tier recorded in `draftsman.json`, ADRs written, evolve mode used, domain pack loaded. The no-plugin arm can't produce these, so they inflate the headline Δ. They're there to catch regressions in the plugin itself (for example, a T2 case drifting to T3).
+- **Outcome graders** judge the design itself (`design.md`, `requirements.md`, `options.md`): is it right-sized, on the requested stack, covering the floor, citing trusted sources? These are fair to both arms, so their per-grader Δ is the honest measure of what the plugin adds.
+- **Process graders** check plugin artifacts: the tier and budget in `draftsman.json`, ADRs written, evolve mode, the domain pack loaded, the `current-state.md` baseline. The no-plugin arm can't produce these, so they inflate the headline Δ. They're there to catch regressions in the plugin itself (for example, a T2 case drifting to T3). `t4-premium-payments/graders/budget-respected.md` is an `llm` grader but a process check, because it reads `draftsman.json`.
 
 `tool_used: Skill` graders are indicators only and don't affect the score. The `--threshold` (default 1.0) applies to the plugin arm.
 

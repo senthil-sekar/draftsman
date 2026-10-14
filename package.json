@@ -1,13 +1,15 @@
 {
   "name": "draftsman",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "description": "Guided, right-sized system design for AI coding agents.",
   "type": "module",
   "engines": { "node": ">=18" },
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "build:adapters": "node scripts/build-adapters.mjs --target all --out dist"
+    "build:adapters": "node scripts/build-adapters.mjs --target all --out dist",
+    "eval": "claude plugin eval . --scaffold --allow-tools Write Edit --disallow-tools AskUserQuestion --no-publish",
+    "eval:quick": "claude plugin eval . --scaffold --allow-tools Write Edit --disallow-tools AskUserQuestion --no-publish --runs 1 --ablation none"
   },
   "license": "MIT"
 }

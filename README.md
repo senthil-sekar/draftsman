@@ -35,8 +35,9 @@ flowchart LR
 | 5 | `/draftsman:doc` | `design.md` with Mermaid diagrams, traceability, NFR mechanisms, and an evolution path |
 | 6 | `/draftsman:review` | A right-size verdict with concrete fixes |
 | any | `/draftsman:status` | Where the session stands and what to run next |
+| — | `/draftsman:evolve <change>` | The same flow for **changing an existing system**: it starts from the current profile and architecture, and marks every component Existing, Changed, or New |
 
-`/draftsman:start` flows straight into `clarify`, and `options` records decisions as you go, so most sessions need only `start`, `doc`, and `review`.
+`/draftsman:start` flows straight into `clarify`, and `options` records decisions as you go, so most sessions need only `start`, `doc`, and `review`. If your idea extends a system already in the repo, `start` hands off to `evolve`.
 
 ## The right-sizing model
 
@@ -60,6 +61,10 @@ Two laws drive the review:
 
 1. **Every component traces to a requirement.** Otherwise it's over-engineering.
 2. **Every requirement traces to a mechanism.** Otherwise it's under-engineering.
+
+**No default stack.** Draftsman never assumes a language or cloud. It uses what it finds in your repo or what you tell it, shows only the matching options, and compares across ecosystems when you have no preference.
+
+**Domain packs** add industry-specific scoring hints and floor items. The **insurance** pack covers effective-dated policies, reproducible rating, consumer-report rules, claims deadlines, OFAC screening, and regulator notification. It loads automatically when the brief involves policies, claims, or premiums. It's a design checklist, not legal advice.
 
 ## Install
 
@@ -103,13 +108,14 @@ See [docs/adapters.md](docs/adapters.md) for what changes outside Claude Code.
 
 ```
 .claude-plugin/     plugin.json, marketplace.json
-skills/             start, clarify, options, decide, doc, review, status (commands)
-                    rightsizing, design-catalog (background knowledge)
+skills/             start, clarify, options, decide, doc, review, status, evolve (commands)
+                    rightsizing, design-catalog, domain-insurance (background knowledge)
 agents/             surveyor (repo + org-tooling scan), researcher (live best-practice lookup),
                     drafter (design author), inspector (independent reviewer)
 rules/              core-rules.md: workflow gates and anti-drift rules
-templates/          requirements, options, ADR, design, review, session state
+templates/          requirements, options, ADR, design, review, current state, session state
 scripts/            validate.mjs, build-adapters.mjs
+evals/              right-sizing regression cases for `claude plugin eval`
 examples/           fnol-intake
 ```
 
@@ -129,11 +135,15 @@ Two things keep Draftsman from designing in a vacuum:
 ## Development
 
 ```bash
-npm run validate          # structural checks (no dependencies)
+npm run validate          # structural checks, including eval cases (no dependencies)
 npm run build:adapters    # generate all adapters into ./dist
+npm run eval:quick        # right-sizing evals: 1 run per case, plugin only
+npm run eval              # full evals: 3 runs per case, with and without the plugin
 claude plugin validate . --strict
 claude --plugin-dir .     # try the plugin locally
 ```
+
+See [evals/README.md](evals/README.md) for what each eval case checks and how to read the scores.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and the [roadmap](docs/roadmap.md).
 

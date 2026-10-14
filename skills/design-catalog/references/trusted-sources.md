@@ -19,7 +19,7 @@ If the project has `.draftsman/trusted-sources.md`, apply its additions (for exa
 
 The official domain of the product or project in question: the one its official repository or homepage links to. For example: `docs.aws.amazon.com`, `aws.amazon.com`, `learn.microsoft.com`, `azure.microsoft.com`, `cloud.google.com`, `docs.cloud.google.com`, `postgresql.org`, `kubernetes.io`, `opentelemetry.io`, `spring.io`, `nodejs.org`, `python.org`, `go.dev`.
 
-Official source repositories on `github.com` or `gitlab.com`, **only under the project's own organization**: never forks, personal repositories, or issue threads by third parties.
+Official source repositories on `github.com` or `gitlab.com` (and their raw-file hosts such as `raw.githubusercontent.com`), **only under the project's own organization**: never forks, personal repositories, or issue threads by third parties.
 
 ### Cloud architecture guidance
 

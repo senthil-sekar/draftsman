@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 — 2026-10-14
+
+**Trusted sources for live research**
+- `trusted-sources.md` lists the only sources live research may use: official vendor and project docs (only for facts about their own products), cloud architecture centers, standards bodies, regulators, and three curated pattern references. It also has a never-use list (blogs, forums, video, listicles, vendor "X vs Y" pages, Wikipedia, law-firm summaries). Projects can add or remove domains in `.draftsman/trusted-sources.md`.
+- `researcher` passes `allowed_domains` on every search, fetches only listed domains, verifies licenses from the source, and drops claims or options with no trusted source. `options` re-checks every URL, and core rule 14 makes a trusted source mandatory.
+
+**Catalog**
+- Every `stacks.md` table gains **Open source** (OSI-approved only) and **Commercial / SaaS** columns. New tables: API management and integration, identity and secrets.
+- Corrected labels: SQL Server and MongoDB are no longer listed as open source. Terraform and Vault are marked BSL, with the OpenTofu and OpenBao forks; Redpanda as BSL; ScyllaDB as source-available. Camunda 7 CE is dropped (end of life). MinIO is dropped (archived). MassTransit v9+ is marked commercial.
+- Dated **licensing notes**, each verified on the maker's or the OSI's own site.
+- New decision points with patterns, costs, and unlock conditions: **DP-15 Analytics and reporting** (operational reporting 0–1 → BI 1 → warehouse 3 → lakehouse 5) and **DP-16 AI and ML** (hosted model 1 → RAG 2 → agent 3 → ML platform 3 → self-hosted model 5).
+- Baseline floor gains **capability-raised** items: analytical stores, LLM use, retrieval over untrusted content, and AI in decisions about people. The insurance pack adds NAIC AI Model Bulletin items.
+- Options carry a `License:` line. `clarify` asks which tools the organization already licenses, and the recommendation rules prefer existing licenses.
+
+**Evals**
+- New cases: `thin-claims-reporting` and `thin-fraud-detection` (one-line briefs) and `research-handbook-assistant` (the live research path with the trusted-domain checks). Eval scripts now allow `WebSearch` and `WebFetch`.
+
 ## 0.3.0 — 2026-10-14
 
 **Brownfield**

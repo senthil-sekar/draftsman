@@ -12,7 +12,8 @@ Load only the file you need.
 |---|---|
 | `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/decision-points.md` | Decide **which** decisions this system actually needs to make |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/patterns.md` | Compare architecture and integration patterns |
-| `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/stacks.md` | Compare concrete technologies across AWS, Azure, GCP, and open source, matched to the user's language and cloud provider (see `options` step 0) |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/stacks.md` | Compare concrete technologies across AWS, Azure, GCP, open source, and commercial/SaaS, matched to the user's language and cloud provider (see `options` step 0), with dated licensing notes |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design-catalog/references/trusted-sources.md` | The only sources the `researcher` agent may use for live research |
 
 ## How to present an option
 
@@ -25,9 +26,12 @@ Cost: 2 + 1 = 3 points (budget 10)
 Pros: one deployable; module boundaries let you split later; low ops
 Cons: one scaling unit; needs discipline to keep modules decoupled
 Team fit: matches existing .NET 8 skills
+License: managed cloud service (consumption billing)
 Source: design-catalog
 Traces to: FR-1..FR-6, NFR-2
 ```
+
+`License:` is one of `open source (<license>)`, `managed cloud service`, `commercial (<licensing model>)`, `SaaS (<pricing model>)`, or `source-available (<license>)`.
 
 An option sourced from live research instead uses `Source: <url> (<date>)` and its cost is marked `(estimated)`.
 
@@ -36,5 +40,6 @@ An option sourced from live research instead uses `Source: <url> (<date>)` and i
 1. Prefer the **cheapest option that satisfies every requirement** it traces to.
 2. Prefer what the **team already knows and runs**, unless a requirement rules it out. Say which requirement.
 3. Prefer **managed services** over self-hosted at T0–T2.
-4. Never recommend an option whose unlock condition is unmet without saying so plainly.
-5. The catalog is a starting point, not a whitelist. Anything outside it gets a cost estimate using the same scale, a note saying it was estimated, and — via the `researcher` agent when live verification is warranted — a source and date rather than a guess from training memory.
+4. Prefer products the organization **already licenses** over new vendor contracts. Never recommend a commercial product without naming an open-source or cloud-native alternative, unless a requirement rules them out. Put license costs in Cons; budget points don't measure money.
+5. Never recommend an option whose unlock condition is unmet without saying so plainly.
+6. The catalog is a starting point, not a whitelist. Anything outside it gets a cost estimate using the same scale, a note saying it was estimated, and, via the `researcher` agent, a source from `trusted-sources.md` with its date rather than a guess from training memory.

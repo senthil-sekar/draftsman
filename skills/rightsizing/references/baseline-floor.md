@@ -45,3 +45,13 @@ The floor is the minimum a design must include. Floor items cost 0 budget points
 | D5 = 3 | Data residency controls; key management with customer-managed keys where required |
 | D7 ≥ 1 | Versioned API contracts; timeouts on every outbound call |
 | D7 ≥ 2 | Anti-corruption layer for legacy integrations; dead-letter handling for messages; contract tests |
+
+## Raised by capability
+
+| Capability in the design | Required mechanisms |
+|---|---|
+| A separate analytical store (warehouse, lakehouse) | The same data classification, masking, and access controls as the source; documented lineage from source to report |
+| Any LLM or ML model | A pinned model version; an evaluation set run on every prompt, model, or data change; timeouts, rate limits, and a fallback when the model is unavailable |
+| LLM calls that include personal data | Prompt and response logging with PII redaction; the provider's data-retention and training terms checked and recorded |
+| Retrieval or tools over content the system doesn't control | Prompt-injection defenses: instructions kept separate from retrieved data, least-privilege tools, and output validation before any action |
+| AI that contributes to decisions about people (eligibility, pricing, claims, hiring) | Human review or an appeal path; logging of the inputs and model version behind each decision; testing for unfair bias; documented purpose and data sources |

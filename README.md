@@ -62,7 +62,7 @@ Two laws drive the review:
 1. **Every component traces to a requirement.** Otherwise it's over-engineering.
 2. **Every requirement traces to a mechanism.** Otherwise it's under-engineering.
 
-**No default stack.** Draftsman never assumes a language or cloud. It uses what it finds in your repo or what you tell it, shows only the matching options, and compares across ecosystems when you have no preference.
+**No default stack.** Draftsman never assumes a language or cloud. It uses what it finds in your repo or what you tell it, shows only the matching options, and compares across ecosystems when you have no preference. Every option states its license (open source, managed cloud, commercial, SaaS, or source-available), and Draftsman prefers tools your organization already licenses over new contracts.
 
 **Domain packs** add industry-specific scoring hints and floor items. The **insurance** pack covers effective-dated policies, reproducible rating, consumer-report rules, claims deadlines, OFAC screening, and regulator notification. It loads automatically when the brief involves policies, claims, or premiums. It's a design checklist, not legal advice.
 
@@ -130,7 +130,7 @@ If your repo has an [AgentAtlas](https://github.com/senthil-sekar/agent-atlas) m
 Two things keep Draftsman from designing in a vacuum:
 
 - **Org tooling.** Before proposing something new, the surveyor checks whether any connected MCP tool looks like an internal search, catalog, or wiki, and queries it for an existing solution. If none is connected, it asks once instead of assuming a build is needed.
-- **Live research.** `design-catalog` is a hand-curated, versioned reference — it can go stale. When `/draftsman:options` hits a decision point the catalog doesn't cover, or the user asks to double-check current practice, the `researcher` agent searches for current, dated sources instead of guessing from training data. Every researched option is marked **estimated** and carries its source, never presented with the same confidence as a catalog entry.
+- **Live research.** `design-catalog` is a hand-curated, versioned reference — it can go stale. When `/draftsman:options` hits a decision point the catalog doesn't cover, or the user asks to double-check current practice, the `researcher` agent looks it up instead of guessing from training data. It uses **only verified, trusted sources**, listed in [`trusted-sources.md`](skills/design-catalog/references/trusted-sources.md): official vendor and project documentation (for facts about their own products only), cloud architecture centers, standards bodies, and regulators. Every search is restricted with `allowed_domains`. Blogs, forums, listicles, and vendor "X vs Y" pages are excluded. If no trusted source covers a claim, the claim is dropped. Every researched option is marked **estimated** and cites its source and date. To add your organization's own trusted domains, create `.draftsman/trusted-sources.md` in your project.
 
 ## Development
 

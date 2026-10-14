@@ -1,6 +1,6 @@
 ---
 name: start
-description: Start a Draftsman system design session from a rough idea. Use when the user wants to design, architect, or plan a new system, service, or major feature and wants a right-sized result.
+description: Start a Draftsman system design session from a rough idea. Use whenever the user asks to design, architect, or plan a system, service, tool, platform, or major feature, of any size (including small internal tools), or asks what to build for a new capability.
 argument-hint: "<rough description of what you want to build>"
 ---
 

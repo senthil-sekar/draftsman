@@ -30,6 +30,7 @@ This pack is a design checklist, not legal advice. Obligations vary by state, co
 | FNOL or claims intake during catastrophe (CAT) events | **D1**: ask about CAT surge; 10x bursts mean **D1 = 3** |
 | Renewal or billing cycles | **D1**: batch peaks on due dates; ask how big |
 | A core suite (Guidewire, Duck Creek, Majesco, Sapiens) or a mainframe | **D7 ≥ 2** (legacy) |
+| AI or predictive models in underwriting, rating, claims, or fraud decisions | **D5 ≥ 2**; add the AI floor items from the compliance floor |
 
 ## Domain concepts to get right
 

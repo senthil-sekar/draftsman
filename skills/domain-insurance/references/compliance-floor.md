@@ -34,6 +34,14 @@ Each item names the obligation that usually drives it. Obligations vary by juris
 | A referral path to the special investigations unit (SIU) or fraud scoring | State anti-fraud plan and fraud reporting requirements |
 | Medical and bodily-injury records classified and access-restricted as the most sensitive tier | State medical privacy laws; contractual requirements |
 
+## AI and predictive models
+
+| Floor item | Usually driven by |
+|---|---|
+| A written AI systems program: an inventory of AI and predictive models in use, their purpose, owner, and data sources, including third-party models | NAIC Model Bulletin on the Use of Artificial Intelligence Systems by Insurers (adopted or similar guidance in over half of states) |
+| Testing for unfair discrimination before and after deployment of any model used in underwriting, rating, claims, or fraud decisions | Same; state unfair trade practices laws |
+| Records sufficient to explain a consumer-impacting decision to a regulator: model version, inputs, and outcome | Same; market-conduct exams |
+
 ## Premium payments
 
 | Floor item | Usually driven by |

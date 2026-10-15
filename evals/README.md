@@ -57,6 +57,13 @@ These two cases test the original problem: a one-sentence request with no facts.
 
 `t1-agent-licensing` completed one plugin run (1.00, all checks passed) before the run was stopped by a time limit; its other runs are not counted.
 
+### Full-fact T2 and T4, 3 runs per case (2026-10-15)
+
+| Case | With plugin | Without | What happened |
+|---|---|---|---|
+| `t4-premium-payments` | 1.00 (3/3) | 0.62 | Both arms covered every critical mechanism (`not-under-engineered` 3/3 each) and stayed on the stack. The no-plugin arm failed only process checks (tier, budget, ADRs). |
+| `t2-endorsement-intake` | 1.00 (2 graded runs) | 0.67 | First run: the plugin failed `generic-floor` 2/3 while its designs had every mechanism. They made the policy-plus-premium change one atomic call to the policy admin system that owns both, which the grader didn't accept. After fixing the grader, both graded re-runs passed everything; the third re-run's judge calls hit the usage limit and are not counted. Both arms right-sized and stayed on stack 3/3; the plugin covered the insurance floor 3/3. |
+
 ### 0.4.0, 3 runs per case (2026-10-14), partial
 
 Five cases (`t1-*`, `t2-*`, `t4-*`, `thin-*`) had no valid data in this run: their runs hit the account's usage limit before starting. The thin-brief cases were re-run above. The three that completed:

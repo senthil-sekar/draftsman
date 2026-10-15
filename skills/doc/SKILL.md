@@ -8,7 +8,9 @@ argument-hint: "[slug]"
 
 Read `${CLAUDE_PLUGIN_ROOT}/rules/core-rules.md`. Load the active session.
 
-**Gate:** `phase` must be `decided` or later. If a raised decision point has no ADR, list it and point to `/draftsman:options`.
+**Gate:** `phase` must be `decided` or later. Then list `docs/design/<slug>/decisions/` and check that every entry in `draftsman.json` `decisions`, and every decision point raised in `options.md`, has an ADR file:
+- **Decided but no file** (the choice is in `draftsman.json`, `options.md`, or the conversation): write the missing ADR now by following `${CLAUDE_PLUGIN_ROOT}/skills/decide/SKILL.md`. That records an existing decision; it doesn't make a new one.
+- **Never decided:** list it and point to `/draftsman:options`.
 
 ## Steps
 

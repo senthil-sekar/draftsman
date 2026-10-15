@@ -20,7 +20,7 @@ Use the `design-catalog` skill (`decision-points.md`, then `patterns.md` and `st
 3. **Check each option** against unlock conditions and the remaining budget, counting the costs of decisions already accepted. Say plainly if an option would push the design over budget.
 4. **Write `options.md`** from `${CLAUDE_PLUGIN_ROOT}/templates/options.md`.
 5. **Present in batches of up to 3 decision points**, in the order from `decision-points.md`. For each one, show the options compactly and ask the user to choose: accept the recommendation, pick another option, or ask for more detail.
-6. **Record each choice** by following `${CLAUDE_PLUGIN_ROOT}/skills/decide/SKILL.md`, then continue with the next batch. Re-check later options if an earlier choice changes them (for example, choosing Functions changes the messaging options).
+6. **Record each choice** by following `${CLAUDE_PLUGIN_ROOT}/skills/decide/SKILL.md`: write its ADR file before presenting the next batch, then continue. Re-check later options if an earlier choice changes them (for example, choosing Functions changes the messaging options).
 7. When every raised decision point has an ADR, set `phase: "decided"`. Next step: `/draftsman:doc`.
 
 ## Don't

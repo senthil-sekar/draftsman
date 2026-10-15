@@ -5,7 +5,7 @@ These rules apply to every Draftsman command. They exist to stop the two failure
 ## Workflow gates
 
 1. **No design before requirements are locked.** Until `draftsman.json` shows phase `requirements-locked` or later, do not propose architecture, name technologies as choices, or draw diagrams. If the user asks for a design early, say which phase they're in and offer the next command.
-2. **No building before deciding.** Do not write `design.md` until every raised decision point has an ADR.
+2. **No building before deciding.** Do not write `design.md` until every raised decision point has an ADR **file** in `docs/design/<slug>/decisions/`. A decision noted only in `options.md`, `draftsman.json`, or the design is not recorded.
 3. **Locked means locked.** Never silently change a locked requirement or an accepted ADR. If new information conflicts with one, stop and raise a **change request**: state the conflict, the options (keep, amend, supersede), and wait for the user.
 
 ## Right-sizing

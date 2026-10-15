@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 — 2026-10-15
+
+Fixes found by the 3-run evals.
+
+- An ADR is now explicitly a **file** in `decisions/` (core rule 2). `options` writes each ADR before the next batch. `doc` writes any ADR whose decision was already made but has no file, and sends only undecided points back to `options`. `status` flags decisions with no ADR file.
+- `start` triggers on any request to design a system, tool, or feature of any size. It used to require that the user want "a right-sized result", and it missed "Design a small internal tool" in one run. (Merged with 0.4.0, but not in its notes.)
+- `trusted-sources.md` excludes community, Q&A, and forum sections on vendor domains (Microsoft Q&A, AWS re:Post, AWS Builder Center, `discuss.*` sites, GitHub issues). The no-plugin arm cited several of these. (Merged with 0.4.0, but not in its notes.)
+- `evals/README.md` records the thin-brief results. Without the plugin, a one-line fraud-detection brief over-built in 3/3 runs; with the plugin, 0/3.
+
 ## 0.4.0 — 2026-10-14
 
 **Trusted sources for live research**

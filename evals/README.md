@@ -46,9 +46,27 @@ There are two kinds of grader, and both count toward the score:
 
 ## Results
 
+### Thin briefs, 3 runs per case (2026-10-15)
+
+These two cases test the original problem: a one-sentence request with no facts.
+
+| Case | With plugin | Without | What happened |
+|---|---|---|---|
+| `thin-fraud-detection` | 0.96 | 0.56 | **Without the plugin, every run over-built** (`not-over-built` 0/3, all judges unanimous): run 1 had a feature store, a lakehouse, Kubernetes, and Redis; run 2 Kafka, a feature store, EKS, and a graph database; run 3 Kafka, a feature store, AKS, and Neo4j/Neptune. **With the plugin, 3/3 stayed right-sized**, with heavier options only as rejected or deferred. Both arms recorded assumptions and routed flagged claims to human review with bias testing. The plugin's one miss was a run that wrote no ADR files, fixed afterward in `doc` and core rule 2. |
+| `thin-claims-reporting` | 1.00 | 0.67 | Both arms stayed on the existing PostgreSQL. Without the plugin, 2 of 3 runs presented guessed users, freshness, and history as stated requirements instead of assumptions (`assumptions-explicit` 1/3, plugin 3/3). |
+
+`t1-agent-licensing` completed one plugin run (1.00, all checks passed) before the run was stopped by a time limit; its other runs are not counted.
+
+### Full-fact T2 and T4, 3 runs per case (2026-10-15)
+
+| Case | With plugin | Without | What happened |
+|---|---|---|---|
+| `t4-premium-payments` | 1.00 (3/3) | 0.62 | Both arms covered every critical mechanism (`not-under-engineered` 3/3 each) and stayed on the stack. The no-plugin arm failed only process checks (tier, budget, ADRs). |
+| `t2-endorsement-intake` | 1.00 (2 graded runs) | 0.67 | First run: the plugin failed `generic-floor` 2/3 while its designs had every mechanism. They made the policy-plus-premium change one atomic call to the policy admin system that owns both, which the grader didn't accept. After fixing the grader, both graded re-runs passed everything; the third re-run's judge calls hit the usage limit and are not counted. Both arms right-sized and stayed on stack 3/3; the plugin covered the insurance floor 3/3. |
+
 ### 0.4.0, 3 runs per case (2026-10-14), partial
 
-Five cases (`t1-*`, `t2-*`, `t4-*`, `thin-*`) have no valid data: their runs hit the account's usage limit before starting. The three that completed:
+Five cases (`t1-*`, `t2-*`, `t4-*`, `thin-*`) had no valid data in this run: their runs hit the account's usage limit before starting. The thin-brief cases were re-run above. The three that completed:
 
 | Case | With plugin | Without | Outcome checks the no-plugin arm failed |
 |---|---|---|---|
@@ -56,7 +74,7 @@ Five cases (`t1-*`, `t2-*`, `t4-*`, `thin-*`) have no valid data: their runs hit
 | `evolve-claims-reporting` | 1.00 (3/3) | 0.40 | `change-is-explicit` 0/3: no Existing/Changed/New marking or rollout plan. Both arms extended the existing app rather than adding a data platform. |
 | `t0-pto-tracker` | 0.89 (2/3) | 0.67 | None: both arms right-sized and stayed on the stack. The plugin's one miss was a run where the `start` skill didn't trigger, so no session or ADRs were written. The skill's description was broadened afterward. |
 
-What these show so far: with full facts, the model already right-sizes without the plugin. The measured gains are trusted sourcing, explicit change plans, the floor items, and the session artifacts. The thin-brief cases, which test the missing-facts behavior, still need a complete run.
+With full facts, the model already right-sizes without the plugin; the measured gains there are trusted sourcing, explicit change plans, the floor items, and the session artifacts. With a thin brief, the gain is right-sizing itself (see above).
 
 ### 0.3.0, 1 run per case (2026-10-14)
 

@@ -21,4 +21,4 @@ Open:      Q-2 retention period for claim photos
 Next:      /draftsman:options DP-6
 ```
 
-4. Point out anything stale: requirements changed after an ADR was written, or ADRs added after `design.md` was written (compare `updatedAt` values and file modification times).
+4. Point out anything stale: requirements changed after an ADR was written, or ADRs added after `design.md` was written (compare `updatedAt` values and file modification times). Also flag any decision in `draftsman.json` with no ADR file in `decisions/`.
